@@ -9,13 +9,18 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
-import { getContacts } from "./data";
+import { createEmptyContact, getContacts } from "./data";
 
 import appStylesHref from "./app.css?url";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: appStylesHref },
 ];
+
+export const action = async () => {
+  const contact = await createEmptyContact();
+  return { contact };
+};
 
 // need to export or else not available even in
 // module located within the same file
